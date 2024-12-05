@@ -78,30 +78,55 @@ Future<void> broadCasStream() async {
 void streamMetotlariKullanimi() {
   final mystream = getNumbers();
 
-  mystream.expand((element) => [element, element * 2, 99]).listen(
-    //listenin her bir elemanını genişletir.
-    (event) {
-      print("Elemenların her birinin denişlemiş hali : " + event.toString());
-    },
-  );
+  // mystream.expand((element) => [element, element * 2, 99]).listen(
+  //   (event) {
+  //     print("Elemenların her birinin denişlemiş hali : " + event.toString());
+  //   },
+  // );
+
+  // mystream
+  //     .map(
+  //   (event) => event * 5,
+  // )
+  //     .listen(
+  //   (event) {
+  //     print("listeyi başka listeye dönüşmüş hali:" + event.toString());
+  //   },
+  // );
+
+  // mystream
+  //     .where(
+  //   (event) => event % 2 == 0,
+  // )
+  //     .listen(
+  //   (event) {
+  //     print("Şartlı ifade: " + event.toString());
+  //   },
+  // );
+
+  // mystream.take(2).listen(
+  //   (event) {
+  //     print("Counta göre alınan elemanları" + event.toString());
+  //   },
+  // );
+
+  // mystream.distinct().listen(
+  //   (event) {
+  //     print("farklı olan elemanlar : " + event.toString());
+  //   },
+  // );
 
   mystream
       .map(
-    (event) => event * 5,
-  )
-      .listen(
-    (event) {
-      print("listeyi başka listeye dönüşmüş hali:" + event.toString());
-    },
-  );
-
-  mystream
+        (event) => event * 2,
+      )
       .where(
-    (event) => event % 2 == 0,
-  )
+        (event) => event % 3 == 0,
+      )
+      .distinct()
       .listen(
     (event) {
-      print("Şartlı ifade: " + event.toString());
+      print("Çoklu Stream : " + event.toString());
     },
   );
 }
