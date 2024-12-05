@@ -78,21 +78,30 @@ Future<void> broadCasStream() async {
 void streamMetotlariKullanimi() {
   final mystream = getNumbers();
 
-  // mystream.expand((element) => [element, element * 2, 99]).listen(
-  //   //listenin her bir elemanını genişletir.
-  //   (event) {
-  //     print(event);
-  //   },
-  // );
+  mystream.expand((element) => [element, element * 2, 99]).listen(
+    //listenin her bir elemanını genişletir.
+    (event) {
+      print("Elemenların her birinin denişlemiş hali : " + event.toString());
+    },
+  );
 
-//listeyi başka tabloya ddönüştürür.
   mystream
       .map(
     (event) => event * 5,
   )
       .listen(
     (event) {
-      print(event);
+      print("listeyi başka listeye dönüşmüş hali:" + event.toString());
+    },
+  );
+
+  mystream
+      .where(
+    (event) => event % 2 == 0,
+  )
+      .listen(
+    (event) {
+      print("Şartlı ifade: " + event.toString());
     },
   );
 }
