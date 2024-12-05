@@ -5,15 +5,16 @@ Stream<int> getNumbers() async* {
     yield i;
     await Future.delayed(Duration(seconds: 1));
 
-    if (i == 2) {
-      throw Exception('2 oldu hata çıktı');
-    }
+    // if (i == 2) {
+    //   throw Exception('2 oldu hata çıktı');
+    // }
   }
 }
 
 void main(List<String> args) {
   //subscriptonIslemleri();
-  broadCasStream();
+  // broadCasStream();
+  expandKullanimi();
 }
 
 void subscriptonIslemleri() {
@@ -72,4 +73,14 @@ Future<void> broadCasStream() async {
           .toString());
 
   print("Join kullanımı  " + (await myStream.join(' , ')).toString());
+}
+
+void expandKullanimi() {
+  final mystream = getNumbers();
+
+  mystream.expand((element) => [element, element * 2, 99]).listen(  //listenin her bir elemanını genişletir.
+    (event) {
+      print(event);
+    },
+  );
 }
