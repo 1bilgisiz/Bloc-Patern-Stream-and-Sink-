@@ -14,7 +14,7 @@ Stream<int> getNumbers() async* {
 void main(List<String> args) {
   //subscriptonIslemleri();
   // broadCasStream();
-  expandKullanimi();
+  streamMetotlariKullanimi();
 }
 
 void subscriptonIslemleri() {
@@ -75,10 +75,22 @@ Future<void> broadCasStream() async {
   print("Join kullanımı  " + (await myStream.join(' , ')).toString());
 }
 
-void expandKullanimi() {
+void streamMetotlariKullanimi() {
   final mystream = getNumbers();
 
-  mystream.expand((element) => [element, element * 2, 99]).listen(  //listenin her bir elemanını genişletir.
+  // mystream.expand((element) => [element, element * 2, 99]).listen(
+  //   //listenin her bir elemanını genişletir.
+  //   (event) {
+  //     print(event);
+  //   },
+  // );
+
+//listeyi başka tabloya ddönüştürür.
+  mystream
+      .map(
+    (event) => event * 5,
+  )
+      .listen(
     (event) {
       print(event);
     },
