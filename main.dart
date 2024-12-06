@@ -11,10 +11,43 @@ Stream<int> getNumbers() async* {
   }
 }
 
+StreamController<int> _controller = StreamController<int>.broadcast();
+Stream<int> get myStream => _controller.stream;
+Sink<int> get mySink => _controller.sink;
+
 void main(List<String> args) {
   //subscriptonIslemleri();
   // broadCasStream();
-  streamMetotlariKullanimi();
+  //streamMetotlariKullanimi();
+  StreamControllerKullanim();
+}
+
+void StreamControllerKullanim() {
+  myStream
+      .map(
+    (event) => event * 2,
+  )
+      .listen(
+    (event) {
+      print("Çoklu Stream Controller" + event.toString());
+    },
+  );
+
+  myStream.listen(
+    (event) {
+      print(event);
+    },
+  );
+  veriEkle();
+}
+
+void veriEkle() async {
+  mySink.add(5);
+  await Future.delayed(Duration(seconds: 1));
+  mySink.add(10);
+  await Future.delayed(Duration(seconds: 1));
+  mySink.add(15);
+  await Future.delayed(Duration(seconds: 1));
 }
 
 void subscriptonIslemleri() {
